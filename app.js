@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGO_URI;
@@ -26,6 +27,7 @@ run().catch(console.dir);
 
 // Bodyparser Middleware
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use('/', require('./routes/index'));
