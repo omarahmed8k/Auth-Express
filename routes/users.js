@@ -53,7 +53,7 @@ router.post('/register', (req, res) => {
                         });
                 });
             });
-        });
+        }).catch(err => res.status(400).json({ msg: "Error" }));
 });
 
 router.post('/login', (req, res) => {
@@ -91,7 +91,7 @@ router.post('/login', (req, res) => {
                         }
                     )
                 })
-        });
+        }).catch(err => res.status(400).json({ msg: "Error" }));
 });
 
 module.exports = router;

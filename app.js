@@ -27,7 +27,10 @@ run().catch(console.dir);
 
 // Bodyparser Middleware
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(cors(
+    { origin: 'http://localhost:5173', credentials: true },
+    { origin: 'https://auth-to-do-with-express.vercel.app', credentials: true }
+));
 
 // Routes
 app.use('/', require('./routes/index'));
