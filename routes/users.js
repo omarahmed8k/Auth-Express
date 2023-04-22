@@ -33,6 +33,8 @@ router.post('/register', (req, res) => {
                     newUser.save()
                         .then(user => {
                             res.json({
+                                success: true,
+                                access: true,
                                 user: {
                                     id: user.id,
                                     name: user.name,
@@ -63,6 +65,8 @@ router.post('/login', (req, res) => {
                 if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
                 res.json({
+                    success: true,
+                    access: true,
                     user: {
                         id: user.id,
                         name: user.name,
