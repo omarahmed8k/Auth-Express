@@ -136,12 +136,12 @@ const options = {
                     ]
                 },
             },
-            "users": {
+            "user": {
                 "get": {
                     "tags": [
-                        "Users"
+                        "User"
                     ],
-                    "operationId": "getUsers",
+                    "operationId": "getUser",
                     "produces": [
                         "application/json"
                     ],
