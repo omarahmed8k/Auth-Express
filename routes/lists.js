@@ -1,77 +1,30 @@
 const express = require('express');
 const router = new express.Router();
+const { createList, getLists, getListById, updateList, deleteList, } = require('../controllers/listController.js');
 
-// Lists model
-const Lists = require('../models/Lists');
-
-// Lists Create API
+// Lists Create APIs
 router.post('', (req, res) => {
-    const { description, ownerId } = req.body;
-
-    // Simple validation
-    if (!description || !ownerId) {
-        return res.status(400).json({ msg: 'Please enter all fields' });
-    }
-
-    const newList = new Lists({ description, ownerId });
-    newList.save().then(list => {
-        res.json({
-            success: true,
-            list: {
-                id: list.id,
-                ownerId: list.ownerId,
-                description: list.description,
-            }
-        })
-    }).catch(err => res.status(400).json({ msg: "Error" }));
-
+    createList(req, res);
 })
 
-// Lists Get API by user
+// Lists Get by User ID API
 router.get('', (req, res) => {
-    Lists.find({ ownerId: req.query.user })
-        .then(lists => res.json(lists))
-        .catch(err => res.status(400).json({ msg: "Error" }));
+    getLists(req, res);
 });
 
-// Lists Get by ID API
+// Lists Get by List ID API
 router.get('/:id', (req, res) => {
-    Lists.findById(req.params.id)
-        .then(list => res.json(list))
-        .catch(err => res.status(400).json({ msg: "Error" }));
+    getListById(req, res);
 });
 
 // Lists Update API
 router.patch('/:id', (req, res) => {
-    const { description } = req.body;
-
-    // Simple validation
-    if (!description) {
-        return res.status(400).json({ msg: 'Please enter all fields' });
-    }
-
-    Lists.findByIdAndUpdate(req.params.id, { description }, { new: true })
-        .then(list => {
-            res.json({
-                success: true,
-                list: {
-                    id: list.id,
-                    ownerId: list.ownerId,
-                    description: list.description,
-                }
-            })
-        }).catch(err => res.status(400).json({ msg: "Error" }));
-
+    updateList(req, res);
 })
 
 // Lists Delete API
 router.delete('/:id', (req, res) => {
-    Lists.findByIdAndDelete(req.params.id)
-        .then(list => {
-            res.json({
-                success: true,
-            })
-        }).catch(err => res.status(400).json({ msg: "Error" }));
+    deleteList(req, res);
 })
 
 module.exports = router;

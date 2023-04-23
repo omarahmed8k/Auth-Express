@@ -1,14 +1,10 @@
 const express = require('express');
 const router = new express.Router();
-
-// User model
-const User = require('../models/User');
+const { getUser } = require('../controllers/userController.js');
 
 // Get User API
 router.get('/:id', (req, res) => {
-    User.findById(req.params.id)
-        .then(user => res.json(user))
-        .catch(err => res.status(400).json({ msg: "Error" }));
+    getUser(req, res);
 });
 
 module.exports = router;
