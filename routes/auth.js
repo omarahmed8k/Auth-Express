@@ -6,7 +6,7 @@ const bycrypt = require('bcryptjs');
 // User model
 const User = require('../models/User');
 
-// Login and Register routes
+// Register API
 router.post('/register', (req, res) => {
     const { name, email, password } = req.body;
 
@@ -47,7 +47,7 @@ router.post('/register', (req, res) => {
         }).catch(err => res.status(400).json({ msg: "Error" }));
 });
 
-
+// Login API
 router.post('/login', (req, res) => {
     const { email, password } = req.body;
 
